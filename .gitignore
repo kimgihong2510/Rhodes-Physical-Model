@@ -1,0 +1,7 @@
+__pycache__/
+
+.DS_Store
+
+flux_tables/
+test/
+venv/

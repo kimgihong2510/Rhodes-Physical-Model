@@ -1,0 +1,8 @@
+
+numpy
+scipy
+librosa
+numba
+mido
+soundfile
+tqdm
