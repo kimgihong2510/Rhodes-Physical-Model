@@ -24,7 +24,7 @@ class TINE:
     r: float = 0.0005 
     rho: float = 7850
     E: float = 2e11
-    sigma_0: float = 0.0005 # 0.0001
+    sigma_0: float = 0.001 # 0.0001
     sigma_1: float = 0.0005 # 0.005
     I: float = math.pi * r ** 4 / 4
     A: float = math.pi * r**2
@@ -46,7 +46,7 @@ class DAMPER:
     K1: float = 1e2
     K3: float = 1e5
     R: float = 0.5
-    contact_pos: float = 0.2
+    contact_pos: float = 0.3
 
 @dataclass
 class PICKUP:
@@ -61,7 +61,7 @@ def _render(
     hammer_lam, hammer_k, hammer_m, hammer_alpha, 
     tine_kappa, tine_sigma_0, tine_sigma_1, tine_rho,
     tine_A, tine_length,
-    is_damped, damper_contact_index, damper_K1, damper_K3, damper_R
+    is_key_released, damper_contact_index, damper_K1, damper_K3, damper_R
 ):
     """
     Function outside RhodesSingleKey class to enable Numba 
@@ -115,7 +115,6 @@ def _render(
     # 3-2. clamped boundary condtion
     u_next[0] = 0
 
-    # CHECK IF VALID!!
     u_next[1] = (
         (2 - 7*mu**2 - 4*s) * u[1]
         + (4*mu**2 + 2*s) * u[2]
@@ -149,7 +148,7 @@ def _render(
     u_next[hammer_contact_indices] += hammer_weight * F * k**2 / (tine_rho*tine_A*h*(1+tine_sigma_0*k))
 
     # 4. Apply the damper force.
-    if is_damped:
+    if is_key_released:
         eta = u[damper_contact_index]
         eta_prev = u_prev[damper_contact_index]
         u_star = u_next[damper_contact_index]
@@ -234,7 +233,7 @@ class RhodesSingleKey():
     
     def note_on(self, velocity):
         self.is_key_released = False
-        self.pending_strike_velocity = HAMMER.max_v_in * (velocity / 127) ** 2 # midi velocity range: 0~127
+        self.pending_strike_velocity = HAMMER.max_v_in * (velocity / 127)**3 # midi velocity range: 0~127
 
         if not self.has_started:
             self.init_state()
