@@ -2,7 +2,7 @@
 
 A Python implementation of a Rhodes-style electric piano, including tine vibration, hammer contact, damping, and a magnetic pickup model.
 
-You can listen to the rendered result in [DEMO-just_the_two_of_us_pickup.wav](DEMO-just_the_two_of_us_pickup.wav).
+You can listen to the rendered result on the [audio demo page](https://kimgihong2510.github.io/Rhodes-Physical-Model/demo/).
 
 ## References
 
@@ -18,8 +18,12 @@ You can listen to the rendered result in [DEMO-just_the_two_of_us_pickup.wav](DE
 ## Included Assets
 
 - `flux_table.npz`: A precomputed flux lookup table for the configured pickup geometry.
-- `just_the_two_of_us.mid`: A MIDI of “Just the Two of Us,” an iconic Rhodes piano song, for testing. MIDI sourced from [Online Sequencer](https://onlinesequencer.net/4897971).
+
+Two demo MIDI files are included for testing:
+
+- “Just the Two of Us” — sourced from [Online Sequencer](https://onlinesequencer.net/4897971).
+- “What’d I Say” — sourced from [MIDI World](https://www.midiworld.com/download/792).
 
 ## TODO
 
-- [ ] Extend the tine model from single-direction transverse vibration to planar vibration.
+- Extend the tine model from single-direction transverse vibration to planar vibration.

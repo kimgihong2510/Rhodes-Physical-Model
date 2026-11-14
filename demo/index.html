@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rhodes Audio Demo</title>
+  <style>
+    body {
+      max-width: 1400px;
+      margin: 40px auto;
+      padding: 0 24px;
+      font-family: sans-serif;
+      line-height: 1.5;
+    }
+
+    .demo {
+      max-width: 420px;
+      margin-top: 32px;
+    }
+
+    audio {
+      width: 100%;
+    }
+
+    .note-demo {
+      margin-top: 40px;
+    }
+
+    .velocities {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .velocities h3 {
+      font-size: 1rem;
+      font-weight: normal;
+    }
+
+    @media (max-width: 1000px) {
+      .velocities { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 540px) {
+      .velocities { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Rhodes Audio Demo</h1>
+
+  <div class="demo">
+    <h2 id="what-id-say-title">What’d I Say</h2>
+    <audio controls preload="none" aria-labelledby="what-id-say-title"
+           src="./what_id_say_pickup.wav">
+      Your browser does not support audio playback.
+      <a href="./what_id_say_pickup.wav">Download the WAV file</a>.
+    </audio>
+  </div>
+
+  <div class="demo">
+    <h2 id="demo-title">Just the Two of Us</h2>
+    <audio controls preload="none" aria-labelledby="demo-title"
+           src="./just_the_two_of_us_pickup.wav">
+      Your browser does not support audio playback.
+      <a href="./just_the_two_of_us_pickup.wav">Download the WAV file</a>.
+    </audio>
+  </div>
+
+  <section class="note-demo" aria-labelledby="c2-title">
+    <h2 id="c2-title">C2</h2>
+    <div class="velocities">
+      <div>
+        <h3 id="c2-v25">Velocity 25</h3>
+        <audio controls preload="none" aria-labelledby="c2-title c2-v25" src="./C2_velocity_025_pickup.wav"></audio>
+      </div>
+      <div>
+        <h3 id="c2-v50">Velocity 50</h3>
+        <audio controls preload="none" aria-labelledby="c2-title c2-v50" src="./C2_velocity_050_pickup.wav"></audio>
+      </div>
+      <div>
+        <h3 id="c2-v75">Velocity 75</h3>
+        <audio controls preload="none" aria-labelledby="c2-title c2-v75" src="./C2_velocity_075_pickup.wav"></audio>
+      </div>
+      <div>
+        <h3 id="c2-v100">Velocity 100</h3>
+        <audio controls preload="none" aria-labelledby="c2-title c2-v100" src="./C2_velocity_100_pickup.wav"></audio>
+      </div>
+    </div>
+  </section>
+
+  <section class="note-demo" aria-labelledby="c4-title">
+    <h2 id="c4-title">C4</h2>
+    <div class="velocities">
+      <div>
+        <h3 id="c4-v25">Velocity 25</h3>
+        <audio controls preload="none" aria-labelledby="c4-title c4-v25" src="./C4_velocity_025_pickup.wav"></audio>
+      </div>
+      <div>
+        <h3 id="c4-v50">Velocity 50</h3>
+        <audio controls preload="none" aria-labelledby="c4-title c4-v50" src="./C4_velocity_050_pickup.wav"></audio>
+      </div>
+      <div>
+        <h3 id="c4-v75">Velocity 75</h3>
+        <audio controls preload="none" aria-labelledby="c4-title c4-v75" src="./C4_velocity_075_pickup.wav"></audio>
+      </div>
+      <div>
+        <h3 id="c4-v100">Velocity 100</h3>
+        <audio controls preload="none" aria-labelledby="c4-title c4-v100" src="./C4_velocity_100_pickup.wav"></audio>
+      </div>
+    </div>
+  </section>
+
+  <section class="note-demo" aria-labelledby="c6-title">
+    <h2 id="c6-title">C6</h2>
+    <div class="velocities">
+      <div>
+        <h3 id="c6-v25">Velocity 25</h3>
+        <audio controls preload="none" aria-labelledby="c6-title c6-v25" src="./C6_velocity_025_pickup.wav"></audio>
+      </div>
+      <div>
+        <h3 id="c6-v50">Velocity 50</h3>
+        <audio controls preload="none" aria-labelledby="c6-title c6-v50" src="./C6_velocity_050_pickup.wav"></audio>
+      </div>
+      <div>
+        <h3 id="c6-v75">Velocity 75</h3>
+        <audio controls preload="none" aria-labelledby="c6-title c6-v75" src="./C6_velocity_075_pickup.wav"></audio>
+      </div>
+      <div>
+        <h3 id="c6-v100">Velocity 100</h3>
+        <audio controls preload="none" aria-labelledby="c6-title c6-v100" src="./C6_velocity_100_pickup.wav"></audio>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
