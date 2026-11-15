@@ -61,7 +61,8 @@ def _render(
     hammer_lam, hammer_k, hammer_m, hammer_alpha, 
     tine_kappa, tine_sigma_0, tine_sigma_1, tine_rho,
     tine_A, tine_length,
-    is_key_released, damper_contact_index, damper_K1, damper_K3, damper_R
+    is_key_released, damper_contact_index, damper_K1, damper_K3, damper_R,
+    use_clamped_ghost_node
 ):
     """
     Function outside RhodesSingleKey class to enable Numba 
@@ -113,15 +114,18 @@ def _render(
     ) / (1 + tine_sigma_0 * k)
 
     # 3-2. clamped boundary condtion
-    u_next[0] = 0
+    u_next[0] = 0.0
 
-    u_next[1] = (
-        (2 - 7*mu**2 - 4*s) * u[1]
-        + (4*mu**2 + 2*s) * u[2]
-        - mu**2 * u[3]
-        + (-1 + tine_sigma_0*k + 4*s) * u_prev[1]
-        - 2*s * u_prev[2]
-    ) / (1 + tine_sigma_0*k)
+    if use_clamped_ghost_node:
+        u_next[1] = (
+            (2 - 7*mu**2 - 4*s) * u[1]
+            + (4*mu**2 + 2*s) * u[2]
+            - mu**2 * u[3]
+            + (-1 + tine_sigma_0*k + 4*s) * u_prev[1]
+            - 2*s * u_prev[2]
+        ) / (1 + tine_sigma_0*k)
+    else:
+        u_next[1] = 0.0
     
 
     # 3-3. free-end boundary condition
@@ -175,7 +179,10 @@ def _render(
     )
 
 class RhodesSingleKey():
-    def __init__(self, sample_rate, midi_note):
+    def __init__(self, 
+                 sample_rate, 
+                 midi_note, 
+                 use_clamped_ghost_node=True):
         self.sample_rate = sample_rate
 
         # Estimate the tine length from the target fundamental frequency.
@@ -230,6 +237,9 @@ class RhodesSingleKey():
         self.has_started = False
 
         self.init_state()
+
+        # test related parameters
+        self.use_clamped_ghost_node = use_clamped_ghost_node 
     
     def note_on(self, velocity):
         self.is_key_released = False
@@ -272,7 +282,8 @@ class RhodesSingleKey():
             HAMMER.lam, HAMMER.k, HAMMER.M, HAMMER.alpha,
             TINE.kappa, TINE.sigma_0, TINE.sigma_1, TINE.rho, 
             TINE.A, self.tine_length,
-            self.is_key_released, self.damper_contact_index, DAMPER.K1, DAMPER.K3, DAMPER.R
+            self.is_key_released, self.damper_contact_index, DAMPER.K1, DAMPER.K3, DAMPER.R,
+            self.use_clamped_ghost_node
         )
 
         if abs(tine_tip_u) > self.max_tine_tip_u:
