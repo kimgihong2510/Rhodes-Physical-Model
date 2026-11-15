@@ -2,7 +2,8 @@
 
 A Python implementation of a Rhodes-style electric piano, including tine vibration, hammer contact, damping, and a magnetic pickup model.
 
-You can listen to the rendered result on the [audio demo page](https://kimgihong2510.github.io/Rhodes-Physical-Model/demo/).
+## Demo
+### 🎧 [Listen to Audio Demo](https://kimgihong2510.github.io/Rhodes-Physical-Model/demo/).
 
 ## References
 
